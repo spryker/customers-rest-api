@@ -7,16 +7,13 @@
 
 namespace Spryker\Glue\CustomersRestApi\Plugin;
 
-use Generated\Shared\Transfer\RestCustomersAttributesTransfer;
+use Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
-/**
- * @method \Spryker\Glue\CustomersRestApi\CustomersRestApiFactory getFactory()
- */
-class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+class CustomerPasswordResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
 {
     /**
      * {@inheritdoc}
@@ -29,13 +26,8 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
     {
-        $resourceRouteCollection
-            ->addGet('get', true)
-            ->addPost('post', false)
-            ->addPatch('patch', true)
-            ->addDelete('delete', true);
-
-        return $resourceRouteCollection;
+        return $resourceRouteCollection
+            ->addPatch('patch', true);
     }
 
     /**
@@ -47,7 +39,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceType(): string
     {
-        return CustomersRestApiConfig::RESOURCE_CUSTOMERS;
+        return CustomersRestApiConfig::RESOURCE_CUSTOMER_PASSWORD;
     }
 
     /**
@@ -59,7 +51,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getController(): string
     {
-        return 'customer-resource';
+        return 'customer-password-resource';
     }
 
     /**
@@ -71,6 +63,6 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceAttributesClassName(): string
     {
-        return RestCustomersAttributesTransfer::class;
+        return RestCustomerPasswordAttributesTransfer::class;
     }
 }
