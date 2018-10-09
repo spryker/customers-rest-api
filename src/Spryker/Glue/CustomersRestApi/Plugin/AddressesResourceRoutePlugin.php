@@ -7,16 +7,14 @@
 
 namespace Spryker\Glue\CustomersRestApi\Plugin;
 
-use Generated\Shared\Transfer\RestCustomersAttributesTransfer;
+use Generated\Shared\Transfer\RestAddressAttributesTransfer;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceWithParentPluginInterface;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
-/**
- * @method \Spryker\Glue\CustomersRestApi\CustomersRestApiFactory getFactory()
- */
-class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+class AddressesResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface, ResourceWithParentPluginInterface
 {
     /**
      * {@inheritdoc}
@@ -31,7 +29,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
     {
         $resourceRouteCollection
             ->addGet('get', true)
-            ->addPost('post', false)
+            ->addPost('post', true)
             ->addPatch('patch', true)
             ->addDelete('delete', true);
 
@@ -47,7 +45,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceType(): string
     {
-        return CustomersRestApiConfig::RESOURCE_CUSTOMERS;
+        return CustomersRestApiConfig::RESOURCE_ADDRESSES;
     }
 
     /**
@@ -59,7 +57,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getController(): string
     {
-        return 'customer-resource';
+        return 'address-resource';
     }
 
     /**
@@ -71,6 +69,18 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceAttributesClassName(): string
     {
-        return RestCustomersAttributesTransfer::class;
+        return RestAddressAttributesTransfer::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @return string
+     */
+    public function getParentResourceType(): string
+    {
+        return CustomersRestApiConfig::RESOURCE_CUSTOMERS;
     }
 }
