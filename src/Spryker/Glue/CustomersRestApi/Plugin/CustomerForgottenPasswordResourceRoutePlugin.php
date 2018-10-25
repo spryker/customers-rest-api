@@ -7,7 +7,7 @@
 
 namespace Spryker\Glue\CustomersRestApi\Plugin;
 
-use Generated\Shared\Transfer\RestCustomersAttributesTransfer;
+use Generated\Shared\Transfer\RestCustomerForgottenPasswordAttributesTransfer;
 use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
 use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface;
@@ -16,10 +16,11 @@ use Spryker\Glue\Kernel\AbstractPlugin;
 /**
  * @method \Spryker\Glue\CustomersRestApi\CustomersRestApiFactory getFactory()
  */
-class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+class CustomerForgottenPasswordResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
 {
     /**
      * {@inheritdoc}
+     *  - Configures available actions for customer-forgotten-password resource.
      *
      * @api
      *
@@ -30,10 +31,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
     public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
     {
         $resourceRouteCollection
-            ->addGet('get', true)
-            ->addPost('post', false)
-            ->addPatch('patch', true)
-            ->addDelete('delete', true);
+            ->addPost('post', false);
 
         return $resourceRouteCollection;
     }
@@ -47,7 +45,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceType(): string
     {
-        return CustomersRestApiConfig::RESOURCE_CUSTOMERS;
+        return CustomersRestApiConfig::RESOURCE_FORGOTTEN_PASSWORD;
     }
 
     /**
@@ -59,7 +57,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getController(): string
     {
-        return 'customer-resource';
+        return CustomersRestApiConfig::CONTROLLER_CUSTOMER_FORGOTTEN_PASSWORD;
     }
 
     /**
@@ -71,6 +69,6 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
      */
     public function getResourceAttributesClassName(): string
     {
-        return RestCustomersAttributesTransfer::class;
+        return RestCustomerForgottenPasswordAttributesTransfer::class;
     }
 }
