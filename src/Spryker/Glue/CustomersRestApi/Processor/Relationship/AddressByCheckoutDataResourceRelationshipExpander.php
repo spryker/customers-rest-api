@@ -78,6 +78,7 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutDataTransfer|null $payload */
         $payload = $restResource->getPayload();
+        /** @phpstan-ignore instanceof.alwaysTrue */
         if (!$payload || !($payload instanceof RestCheckoutDataTransfer) || !$payload->getAddresses()) {
             return null;
         }
@@ -94,6 +95,7 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutDataTransfer|null $payload */
         $payload = $restResource->getPayload();
+        /** @phpstan-ignore instanceof.alwaysTrue */
         if (!$payload || !($payload instanceof RestCheckoutDataTransfer) || !$payload->getQuote()) {
             return null;
         }

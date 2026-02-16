@@ -63,6 +63,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
             ->setApiCode(CustomersRestApiConfig::RESPONSE_CODE_CUSTOMER_UNAUTHORIZED);
 
         // The check for `method_exists` added for BC reason only.
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (!method_exists($routeAuthorizationConfigTransfer, 'addStrategy')) {
             return $this->setStrategy($routeAuthorizationConfigTransfer);
         }
@@ -85,6 +86,7 @@ class CustomersResourceRoutePlugin extends AbstractPlugin implements ResourceRou
             ->setApiMessage(CustomersRestApiConfig::RESPONSE_DETAILS_CUSTOMER_NOT_FOUND);
 
         // The check for `method_exists` added for BC reason only.
+        /** @phpstan-ignore function.alreadyNarrowedType */
         if (!method_exists($routeAuthorizationConfigTransfer, 'addStrategy')) {
             return [Request::METHOD_GET => $this->setStrategy($routeAuthorizationConfigTransfer)];
         }

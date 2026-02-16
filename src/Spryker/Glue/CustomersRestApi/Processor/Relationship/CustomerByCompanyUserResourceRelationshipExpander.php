@@ -22,6 +22,7 @@ class CustomerByCompanyUserResourceRelationshipExpander extends AbstractCustomer
     {
         /** @var \Generated\Shared\Transfer\CompanyUserTransfer|null $payload */
         $payload = $restResource->getPayload();
+        /** @phpstan-ignore instanceof.alwaysTrue */
         if (!$payload || !($payload instanceof CompanyUserTransfer) || !$payload->getCustomer()) {
             return null;
         }

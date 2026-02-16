@@ -22,6 +22,7 @@ class CustomerByQuoteRequestResourceRelationshipExpander extends AbstractCustome
     {
         /** @var \Generated\Shared\Transfer\QuoteRequestTransfer|null $payload */
         $payload = $restResource->getPayload();
+        /** @phpstan-ignore instanceof.alwaysTrue */
         if (!$payload || !($payload instanceof QuoteRequestTransfer) || !$payload->getCompanyUser()->getCustomer()) {
             return null;
         }
