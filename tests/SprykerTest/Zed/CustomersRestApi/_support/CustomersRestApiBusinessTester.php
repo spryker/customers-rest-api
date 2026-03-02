@@ -91,9 +91,6 @@ class CustomersRestApiBusinessTester extends Actor
         'phone' => '+49 (30) 2084 98350',
     ];
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareFullRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -106,9 +103,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareFullGuestRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -121,9 +115,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareOnlyBillingRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -135,9 +126,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareOnlyBillingGuestRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -149,9 +137,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareOnlyShippingRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -163,9 +148,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareOnlyShippingGuestRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -177,9 +159,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareCustomerRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -190,9 +169,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareGuestCustomerRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -203,9 +179,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer
-     */
     public function prepareNoCustomerRestCheckoutRequestAttributesTransfer(): RestCheckoutRequestAttributesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer */
@@ -214,9 +187,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $restCheckoutRequestAttributesTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function prepareQuoteTransfer(): QuoteTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer */
@@ -225,12 +195,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $quoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $actualQuote
-     *
-     * @return void
-     */
     public function assertBillingAddressMapping(RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer, QuoteTransfer $actualQuote): void
     {
         $expectedBillingAddress = $restCheckoutRequestAttributesTransfer->getBillingAddress();
@@ -239,12 +203,6 @@ class CustomersRestApiBusinessTester extends Actor
         $this->assertAddress($expectedBillingAddress, $actualBillingAddressTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $actualQuote
-     *
-     * @return void
-     */
     public function assertShippingAddressMapping(RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer, QuoteTransfer $actualQuote): void
     {
         $expectedShippingAddress = $restCheckoutRequestAttributesTransfer->getShippingAddress();
@@ -253,12 +211,6 @@ class CustomersRestApiBusinessTester extends Actor
         $this->assertAddress($expectedShippingAddress, $actualShippingAddressTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $actualQuote
-     *
-     * @return void
-     */
     public function assertShippingAddressMappingWithItemLevelShippingAddresses(
         RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer,
         QuoteTransfer $actualQuote
@@ -290,12 +242,6 @@ class CustomersRestApiBusinessTester extends Actor
         return $customersRestApiFacadeMock;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressTransfer $expectedShippingAddress
-     * @param \Generated\Shared\Transfer\AddressTransfer $actualShippingAddressTransfer
-     *
-     * @return void
-     */
     protected function assertAddress(
         RestAddressTransfer $expectedShippingAddress,
         AddressTransfer $actualShippingAddressTransfer

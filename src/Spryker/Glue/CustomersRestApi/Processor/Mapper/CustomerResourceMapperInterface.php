@@ -13,19 +13,8 @@ use Generated\Shared\Transfer\RestCustomersResponseAttributesTransfer;
 
 interface CustomerResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $restCustomersAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function mapCustomerAttributesToCustomerTransfer(RestCustomersAttributesTransfer $restCustomersAttributesTransfer): CustomerTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Generated\Shared\Transfer\RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestCustomersResponseAttributesTransfer
-     */
     public function mapCustomerTransferToRestCustomersResponseAttributesTransfer(
         CustomerTransfer $customerTransfer,
         RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer

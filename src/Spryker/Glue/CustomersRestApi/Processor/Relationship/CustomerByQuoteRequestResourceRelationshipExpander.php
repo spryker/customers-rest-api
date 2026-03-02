@@ -13,11 +13,6 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface;
 
 class CustomerByQuoteRequestResourceRelationshipExpander extends AbstractCustomerResourceRelationshipExpander
 {
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $restResource
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer|null
-     */
     protected function findCustomerTransferInPayload(RestResourceInterface $restResource): ?CustomerTransfer
     {
         /** @var \Generated\Shared\Transfer\QuoteRequestTransfer|null $payload */

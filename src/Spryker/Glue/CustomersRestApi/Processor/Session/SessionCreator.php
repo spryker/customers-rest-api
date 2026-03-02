@@ -35,11 +35,6 @@ class SessionCreator implements SessionCreatorInterface
         $this->customerExpanderPlugins = $customerExpanderPlugins;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return void
-     */
     public function setCustomer(RestRequestInterface $restRequest): void
     {
         $restUserTransfer = $restRequest->getRestUser();
@@ -58,12 +53,6 @@ class SessionCreator implements SessionCreatorInterface
             ->setCustomerRawData($customerTransfer);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function executeCustomerExpanderPlugins(RestRequestInterface $restRequest, CustomerTransfer $customerTransfer): CustomerTransfer
     {
         foreach ($this->customerExpanderPlugins as $customerExpanderPlugin) {

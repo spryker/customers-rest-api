@@ -35,19 +35,11 @@ class CustomerAddressValidator implements CustomerAddressValidatorInterface
      */
     protected $customerFacade;
 
-    /**
-     * @param \Spryker\Zed\CustomersRestApi\Dependency\Facade\CustomersRestApiToCustomerFacadeInterface $customerFacade
-     */
     public function __construct(CustomersRestApiToCustomerFacadeInterface $customerFacade)
     {
         $this->customerFacade = $customerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CheckoutDataTransfer $checkoutDataTransfer
-     *
-     * @return \Generated\Shared\Transfer\CheckoutResponseTransfer
-     */
     public function validateCustomerAddressesInCheckoutData(CheckoutDataTransfer $checkoutDataTransfer): CheckoutResponseTransfer
     {
         $checkoutResponseTransfer = (new CheckoutResponseTransfer())->setIsSuccess(true);
@@ -79,11 +71,6 @@ class CustomerAddressValidator implements CustomerAddressValidatorInterface
         return $checkoutResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CheckoutDataTransfer $checkoutDataTransfer
-     *
-     * @return bool
-     */
     protected function isLoggedCustomer(CheckoutDataTransfer $checkoutDataTransfer): bool
     {
         return $checkoutDataTransfer->getQuote()

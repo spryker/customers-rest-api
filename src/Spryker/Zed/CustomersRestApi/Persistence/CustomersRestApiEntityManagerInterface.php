@@ -9,8 +9,5 @@ namespace Spryker\Zed\CustomersRestApi\Persistence;
 
 interface CustomersRestApiEntityManagerInterface
 {
-    /**
-     * @return void
-     */
     public function updateAddressesWithoutUuid(): void;
 }

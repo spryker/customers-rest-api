@@ -51,9 +51,6 @@ class BillingAddressCheckoutRequestAttributesValidatorPluginTest extends Unit
      */
     protected CustomersRestApiPluginTester $tester;
 
-    /**
-     * @return void
-     */
     public function testShouldIgnoreValidationWhenBillingAddressIsEmpty(): void
     {
         // Arrange
@@ -69,9 +66,6 @@ class BillingAddressCheckoutRequestAttributesValidatorPluginTest extends Unit
         $this->assertEmpty($restErrorCollectionTransfer->getRestErrors());
     }
 
-    /**
-     * @return void
-     */
     public function testShouldIgnoreValidationWhenBillingAddressHasIdField(): void
     {
         // Arrange
@@ -119,9 +113,6 @@ class BillingAddressCheckoutRequestAttributesValidatorPluginTest extends Unit
         }
     }
 
-    /**
-     * @return array
-     */
     public function getMandatoryBillingAddressFieldDataProvider(): array
     {
         return [
@@ -184,9 +175,6 @@ class BillingAddressCheckoutRequestAttributesValidatorPluginTest extends Unit
         ];
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RestAddressTransfer
-     */
     protected function createBillingAddress(): RestAddressTransfer
     {
         return (new RestAddressTransfer())
@@ -200,11 +188,6 @@ class BillingAddressCheckoutRequestAttributesValidatorPluginTest extends Unit
             ->setIso2Code('DE');
     }
 
-    /**
-     * @param string $restAddressField
-     *
-     * @return \Generated\Shared\Transfer\RestErrorMessageTransfer
-     */
     protected function createRestErrorMessage(string $restAddressField): RestErrorMessageTransfer
     {
         return (new RestErrorMessageTransfer())

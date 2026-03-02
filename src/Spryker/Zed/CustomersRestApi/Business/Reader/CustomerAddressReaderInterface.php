@@ -13,12 +13,6 @@ use Generated\Shared\Transfer\RestAddressTransfer;
 
 interface CustomerAddressReaderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressTransfer $restAddressTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public function getCustomerAddress(
         RestAddressTransfer $restAddressTransfer,
         QuoteTransfer $quoteTransfer

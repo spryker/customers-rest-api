@@ -9,8 +9,5 @@ namespace Spryker\Zed\CustomersRestApi\Business\Addresses;
 
 interface AddressesUuidWriterInterface
 {
-    /**
-     * @return void
-     */
     public function updateAddressesUuid(): void;
 }

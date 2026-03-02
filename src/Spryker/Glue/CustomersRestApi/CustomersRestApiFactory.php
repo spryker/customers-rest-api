@@ -58,9 +58,6 @@ use Spryker\Glue\Kernel\AbstractFactory;
  */
 class CustomersRestApiFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Customer\CustomerReaderInterface
-     */
     public function createCustomerReader(): CustomerReaderInterface
     {
         return new CustomerReader(
@@ -72,9 +69,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Customer\CustomerWriterInterface
-     */
     public function createCustomerWriter(): CustomerWriterInterface
     {
         return new CustomerWriter(
@@ -88,9 +82,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Address\AddressReaderInterface
-     */
     public function createAddressReader(): AddressReaderInterface
     {
         return new AddressReader(
@@ -102,9 +93,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Customers\CustomerForgottenPasswordProcessorInterface
-     */
     public function createCustomerForgottenPasswordProcessor(): CustomerForgottenPasswordProcessorInterface
     {
         return new CustomerForgottenPasswordProcessor(
@@ -114,9 +102,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Customers\CustomerPasswordWriterInterface
-     */
     public function createCustomerPasswordWriter(): CustomerPasswordWriterInterface
     {
         return new CustomerPasswordWriter(
@@ -127,9 +112,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\CustomerAddress\CustomerAddressReaderInterface
-     */
     public function createCustomerAddressReader(): CustomerAddressReaderInterface
     {
         return new CustomerAddressReader(
@@ -139,9 +121,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Address\AddressWriterInterface
-     */
     public function createAddressWriter(): AddressWriterInterface
     {
         return new AddressWriter(
@@ -154,9 +133,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Relationship\CustomerResourceRelationshipExpanderInterface
-     */
     public function createCustomerByCompanyUserResourceRelationshipExpander(): CustomerResourceRelationshipExpanderInterface
     {
         return new CustomerByCompanyUserResourceRelationshipExpander(
@@ -165,9 +141,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Relationship\CustomerResourceRelationshipExpanderInterface
-     */
     public function createCustomerByQuoteRequestResourceRelationshipExpander(): CustomerResourceRelationshipExpanderInterface
     {
         return new CustomerByQuoteRequestResourceRelationshipExpander(
@@ -176,9 +149,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Relationship\AddressResourceRelationshipExpanderInterface
-     */
     public function createAddressByCheckoutDataResourceRelationshipExpander(): AddressResourceRelationshipExpanderInterface
     {
         return new AddressByCheckoutDataResourceRelationshipExpander(
@@ -187,57 +157,36 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerForgottenPasswordResourceMapperInterface
-     */
     public function createCustomerForgottenPasswordResourceMapper(): CustomerForgottenPasswordResourceMapperInterface
     {
         return new CustomerForgottenPasswordResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerRestorePasswordResourceMapperInterface
-     */
     public function createCustomerRestorePasswordResourceMapper(): CustomerRestorePasswordResourceMapperInterface
     {
         return new CustomerRestorePasswordResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerResourceMapperInterface
-     */
     public function createCustomerResourceMapper(): CustomerResourceMapperInterface
     {
         return new CustomerResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Mapper\AddressResourceMapperInterface
-     */
     public function createAddressResourceMapper(): AddressResourceMapperInterface
     {
         return new AddressResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiValidatorInterface
-     */
     public function createRestApiValidator(): RestApiValidatorInterface
     {
         return new RestApiValidator($this->createRestApiError());
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiErrorInterface
-     */
     public function createRestApiError(): RestApiErrorInterface
     {
         return new RestApiError();
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Session\SessionCreatorInterface
-     */
     public function createSessionCreator(): SessionCreatorInterface
     {
         return new SessionCreator(
@@ -246,25 +195,16 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\CustomerRestResponseBuilderInterface
-     */
     public function createCustomerRestResponseBuilder(): CustomerRestResponseBuilderInterface
     {
         return new CustomerRestResponseBuilder($this->getResourceBuilder(), $this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\AddressRestResponseBuilderInterface
-     */
     public function createAddressRestResponseBuilder(): AddressRestResponseBuilderInterface
     {
         return new AddressRestResponseBuilder($this->getResourceBuilder());
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface
-     */
     public function getCustomerClient(): CustomersRestApiToCustomerClientInterface
     {
         return $this->getProvidedDependency(CustomersRestApiDependencyProvider::CLIENT_CUSTOMER);
@@ -296,9 +236,6 @@ class CustomersRestApiFactory extends AbstractFactory
         return $this->getProvidedDependency(CustomersRestApiDependencyProvider::PLUGINS_CUSTOMER_POST_CREATE);
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Activator\CustomerActivatorInterface
-     */
     public function createCustomerActivator(): CustomerActivatorInterface
     {
         return new CustomerActivator(
@@ -307,9 +244,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Processor\Checker\CheckoutBillingAddressCheckerInterface
-     */
     public function createCheckoutBillingAddressChecker(): CheckoutBillingAddressCheckerInterface
     {
         return new CheckoutBillingAddressChecker(
@@ -318,9 +252,6 @@ class CustomersRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\CustomersRestApi\Dependency\Service\CustomersRestApiToUtilTextServiceInterface
-     */
     public function getUtilTextService(): CustomersRestApiToUtilTextServiceInterface
     {
         return $this->getProvidedDependency(CustomersRestApiDependencyProvider::SERVICE_UTIL_TEXT);

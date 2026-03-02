@@ -28,9 +28,6 @@ class CustomerAddressesUuidWriterConsole extends Console
      */
     protected const COMMAND_DESCRIPTION = 'Generates UUIDs for the existing customers addresses that do not have one.';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         parent::configure();

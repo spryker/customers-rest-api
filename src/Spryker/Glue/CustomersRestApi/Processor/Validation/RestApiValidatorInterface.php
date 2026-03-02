@@ -15,45 +15,21 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 interface RestApiValidatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\CustomerResponseTransfer $customerResponseTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validateCustomerResponseTransfer(
         CustomerResponseTransfer $customerResponseTransfer,
         RestRequestInterface $restRequest,
         RestResponseInterface $restResponse
     ): RestResponseInterface;
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $restCustomersAttributesTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validateCustomerGender(
         RestCustomersAttributesTransfer $restCustomersAttributesTransfer,
         RestResponseInterface $restResponse
     ): RestResponseInterface;
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validatePassword(
         RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer,
         RestResponseInterface $restResponse
     ): RestResponseInterface;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return bool
-     */
     public function isSameCustomerReference(RestRequestInterface $restRequest): bool;
 }

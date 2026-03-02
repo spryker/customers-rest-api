@@ -48,10 +48,6 @@ class CheckoutBillingAddressChecker implements CheckoutBillingAddressCheckerInte
      */
     protected CustomersRestApiToUtilTextServiceInterface $utilTextService;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\CustomersRestApiConfig $customersRestApiConfig
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Service\CustomersRestApiToUtilTextServiceInterface $utilTextService
-     */
     public function __construct(
         CustomersRestApiConfig $customersRestApiConfig,
         CustomersRestApiToUtilTextServiceInterface $utilTextService
@@ -60,11 +56,6 @@ class CheckoutBillingAddressChecker implements CheckoutBillingAddressCheckerInte
         $this->utilTextService = $utilTextService;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestErrorCollectionTransfer
-     */
     public function checkMandatoryFields(
         RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
     ): RestErrorCollectionTransfer {
@@ -122,11 +113,6 @@ class CheckoutBillingAddressChecker implements CheckoutBillingAddressCheckerInte
         return false;
     }
 
-    /**
-     * @param string $restAddressField
-     *
-     * @return \Generated\Shared\Transfer\RestErrorMessageTransfer
-     */
     protected function buildErrorMessage(string $restAddressField): RestErrorMessageTransfer
     {
         return (new RestErrorMessageTransfer())

@@ -25,10 +25,6 @@ class CustomerActivator implements CustomerActivatorInterface
      */
     protected $customerRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface $customerClient
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\CustomerRestResponseBuilderInterface $customerRestResponseBuilder
-     */
     public function __construct(
         CustomersRestApiToCustomerClientInterface $customerClient,
         CustomerRestResponseBuilderInterface $customerRestResponseBuilder
@@ -37,11 +33,6 @@ class CustomerActivator implements CustomerActivatorInterface
         $this->customerRestResponseBuilder = $customerRestResponseBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function confirmCustomer(RestRequestInterface $restRequest): RestResponseInterface
     {
         /** @var \Generated\Shared\Transfer\RestCustomerConfirmationAttributesTransfer $restCustomerConfirmationAttributesTransfer */

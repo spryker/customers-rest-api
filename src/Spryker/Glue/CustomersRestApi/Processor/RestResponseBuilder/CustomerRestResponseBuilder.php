@@ -29,10 +29,6 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
      */
     protected $customersRestApiConfig;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\CustomersRestApi\CustomersRestApiConfig $customersRestApiConfig
-     */
     public function __construct(
         RestResourceBuilderInterface $restResourceBuilder,
         CustomersRestApiConfig $customersRestApiConfig
@@ -41,13 +37,6 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
         $this->customersRestApiConfig = $customersRestApiConfig;
     }
 
-    /**
-     * @param string $customerUuid
-     * @param \Generated\Shared\Transfer\RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createCustomerRestResource(
         string $customerUuid,
         RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer,
@@ -66,9 +55,6 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
         return $customerRestResource;
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createNoContentResponse(): RestResponseInterface
     {
         return $this->restResourceBuilder->createRestResponse()
@@ -93,9 +79,6 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
         return $restResponse;
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createCustomerConfirmationCodeMissingErrorResponse(): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())
@@ -106,11 +89,6 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
         return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function addCustomerConfirmationFailedError(RestResponseInterface $restResponse): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())

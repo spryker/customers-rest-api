@@ -19,20 +19,11 @@ class CustomerAddressReader implements CustomerAddressReaderInterface
      */
     protected $customerFacade;
 
-    /**
-     * @param \Spryker\Zed\CustomersRestApi\Dependency\Facade\CustomersRestApiToCustomerFacadeInterface $customerFacade
-     */
     public function __construct(CustomersRestApiToCustomerFacadeInterface $customerFacade)
     {
         $this->customerFacade = $customerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressTransfer $restAddressTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public function getCustomerAddress(
         RestAddressTransfer $restAddressTransfer,
         QuoteTransfer $quoteTransfer

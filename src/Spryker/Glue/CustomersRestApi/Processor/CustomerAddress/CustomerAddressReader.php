@@ -30,11 +30,6 @@ class CustomerAddressReader implements CustomerAddressReaderInterface
      */
     protected $addressRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface $customerClient
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\AddressResourceMapperInterface $addressesResourceMapper
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\AddressRestResponseBuilderInterface $addressRestResponseBuilder
-     */
     public function __construct(
         CustomersRestApiToCustomerClientInterface $customerClient,
         AddressResourceMapperInterface $addressesResourceMapper,
@@ -45,11 +40,6 @@ class CustomerAddressReader implements CustomerAddressReaderInterface
         $this->addressRestResponseBuilder = $addressRestResponseBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $restResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function getAddressesByCustomerReference(RestResourceInterface $restResource): RestResourceInterface
     {
         $customerTransfer = (new CustomerTransfer())->setCustomerReference($restResource->getId());

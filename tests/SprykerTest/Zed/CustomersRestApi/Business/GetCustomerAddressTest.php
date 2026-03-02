@@ -53,9 +53,6 @@ class GetCustomerAddressTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetCustomerAddressInCaseWhenAddressWasFound(): void
     {
         // Arrange
@@ -80,9 +77,6 @@ class GetCustomerAddressTest extends Unit
         $this->assertSame($addressesTransfer->getAddresses()->offsetGet(1), $addressTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testGetCustomerAddressInCaseWhenAddressWasNotCompared(): void
     {
         // Arrange
@@ -106,9 +100,6 @@ class GetCustomerAddressTest extends Unit
         $this->assertSame($restAddressTransfer->getAddress1(), $addressTransfer->getAddress1());
     }
 
-    /**
-     * @return void
-     */
     public function testGetCustomerAddressInCaseWhenCustomerAddressesWasNotFound(): void
     {
         // Arrange
@@ -132,9 +123,6 @@ class GetCustomerAddressTest extends Unit
         $this->assertSame($restAddressTransfer->getAddress1(), $addressTransfer->getAddress1());
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AddressesTransfer
-     */
     protected function getFakeAddresses(): AddressesTransfer
     {
         return (new AddressesTransfer())

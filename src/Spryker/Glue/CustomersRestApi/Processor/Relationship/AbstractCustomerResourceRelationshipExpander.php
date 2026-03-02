@@ -26,10 +26,6 @@ abstract class AbstractCustomerResourceRelationshipExpander implements CustomerR
      */
     protected $customerResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\CustomerRestResponseBuilderInterface $customerRestResponseBuilder
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerResourceMapperInterface $customerResourceMapper
-     */
     public function __construct(
         CustomerRestResponseBuilderInterface $customerRestResponseBuilder,
         CustomerResourceMapperInterface $customerResourceMapper
@@ -60,18 +56,8 @@ abstract class AbstractCustomerResourceRelationshipExpander implements CustomerR
         return $resources;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $restResource
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer|null
-     */
     abstract protected function findCustomerTransferInPayload(RestResourceInterface $restResource): ?CustomerTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     protected function createCustomersRestResourceFromCustomerTransfer(?CustomerTransfer $customerTransfer): RestResourceInterface
     {
         $restCustomersResponseAttributesTransfer = $this->customerResourceMapper->mapCustomerTransferToRestCustomersResponseAttributesTransfer(

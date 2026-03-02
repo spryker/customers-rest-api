@@ -13,12 +13,6 @@ use Generated\Shared\Transfer\RestAddressAttributesTransfer;
 
 class AddressResourceMapper implements AddressResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestAddressAttributesTransfer
-     */
     public function mapAddressTransferToRestAddressAttributesTransfer(
         AddressTransfer $addressTransfer,
         CustomerTransfer $customerTransfer
@@ -30,11 +24,6 @@ class AddressResourceMapper implements AddressResourceMapperInterface
             ->setIsDefaultBilling($customerTransfer->getDefaultBillingAddress() === $addressTransfer->getIdCustomerAddress());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressAttributesTransfer $restAddressAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public function mapRestAddressAttributesTransferToAddressTransfer(
         RestAddressAttributesTransfer $restAddressAttributesTransfer
     ): AddressTransfer {

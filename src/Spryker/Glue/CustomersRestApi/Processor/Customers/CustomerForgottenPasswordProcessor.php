@@ -31,11 +31,6 @@ class CustomerForgottenPasswordProcessor implements CustomerForgottenPasswordPro
      */
     protected $customerForgottenPasswordResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface $customerClient
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerForgottenPasswordResourceMapperInterface $customerForgottenPasswordResourceMapper
-     */
     public function __construct(
         CustomersRestApiToCustomerClientInterface $customerClient,
         RestResourceBuilderInterface $restResourceBuilder,
@@ -46,11 +41,6 @@ class CustomerForgottenPasswordProcessor implements CustomerForgottenPasswordPro
         $this->customerForgottenPasswordResourceMapper = $customerForgottenPasswordResourceMapper;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerForgottenPasswordAttributesTransfer $restCustomerForgottenPasswordAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function sendPasswordRestoreMail(
         RestCustomerForgottenPasswordAttributesTransfer $restCustomerForgottenPasswordAttributesTransfer
     ): RestResponseInterface {

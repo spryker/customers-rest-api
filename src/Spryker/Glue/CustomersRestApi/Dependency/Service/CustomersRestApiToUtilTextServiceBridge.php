@@ -22,12 +22,6 @@ class CustomersRestApiToUtilTextServiceBridge implements CustomersRestApiToUtilT
         $this->utilTextService = $utilTextService;
     }
 
-    /**
-     * @param string $string
-     * @param string $separator
-     *
-     * @return string
-     */
     public function camelCaseToSeparator(string $string, string $separator = '-'): string
     {
         return $this->utilTextService->camelCaseToSeparator($string, $separator);

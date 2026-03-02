@@ -13,22 +13,11 @@ use Generated\Shared\Transfer\RestAddressAttributesTransfer;
 
 interface AddressResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestAddressAttributesTransfer
-     */
     public function mapAddressTransferToRestAddressAttributesTransfer(
         AddressTransfer $addressTransfer,
         CustomerTransfer $customerTransfer
     ): RestAddressAttributesTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressAttributesTransfer $restAddressAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public function mapRestAddressAttributesTransferToAddressTransfer(
         RestAddressAttributesTransfer $restAddressAttributesTransfer
     ): AddressTransfer;

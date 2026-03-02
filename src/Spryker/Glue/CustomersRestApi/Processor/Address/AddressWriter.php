@@ -52,14 +52,6 @@ class AddressWriter implements AddressWriterInterface
      */
     protected $addressRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface $customerClient
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Address\AddressReaderInterface $addressReader
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\AddressResourceMapperInterface $addressesResourceMapper
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiErrorInterface $restApiError
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiValidatorInterface $restApiValidator
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\AddressRestResponseBuilderInterface $addressRestResponseBuilder
-     */
     public function __construct(
         CustomersRestApiToCustomerClientInterface $customerClient,
         AddressReaderInterface $addressReader,
@@ -76,12 +68,6 @@ class AddressWriter implements AddressWriterInterface
         $this->addressRestResponseBuilder = $addressRestResponseBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestAddressAttributesTransfer $addressAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createAddress(RestRequestInterface $restRequest, RestAddressAttributesTransfer $addressAttributesTransfer): RestResponseInterface
     {
         $restResponse = $this->addressRestResponseBuilder->createRestResponse();
@@ -100,12 +86,6 @@ class AddressWriter implements AddressWriterInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestAddressAttributesTransfer $addressAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function updateAddress(RestRequestInterface $restRequest, RestAddressAttributesTransfer $addressAttributesTransfer): RestResponseInterface
     {
         $restResponse = $this->addressRestResponseBuilder->createRestResponse();
@@ -131,11 +111,6 @@ class AddressWriter implements AddressWriterInterface
         return $restResponse->addResource($this->getAddressResource($modifiedAddressTransfer, $customerTransfer));
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function deleteAddress(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->addressRestResponseBuilder->createRestResponse();
@@ -175,12 +150,6 @@ class AddressWriter implements AddressWriterInterface
         return $lastAddedAddress;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $modifiedAddressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     protected function getModifiedAddress(
         AddressTransfer $modifiedAddressTransfer,
         CustomerTransfer $customerTransfer
@@ -194,12 +163,6 @@ class AddressWriter implements AddressWriterInterface
         return $modifiedAddressTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     protected function getAddressResource(
         AddressTransfer $addressTransfer,
         CustomerTransfer $customerTransfer

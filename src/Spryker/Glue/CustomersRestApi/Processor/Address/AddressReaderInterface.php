@@ -13,18 +13,7 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 interface AddressReaderInterface
 {
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getAddressesByAddressUuid(RestRequestInterface $restRequest): RestResponseInterface;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param string $uuid
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer|null
-     */
     public function findAddressByUuid(RestRequestInterface $restRequest, string $uuid): ?AddressTransfer;
 }

@@ -12,11 +12,6 @@ use Generated\Shared\Transfer\RestCustomerForgottenPasswordAttributesTransfer;
 
 class CustomerForgottenPasswordResourceMapper implements CustomerForgottenPasswordResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerForgottenPasswordAttributesTransfer $restCustomerForgottenPasswordAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function mapCustomerForgottenPasswordAttributesToCustomerTransfer(
         RestCustomerForgottenPasswordAttributesTransfer $restCustomerForgottenPasswordAttributesTransfer
     ): CustomerTransfer {

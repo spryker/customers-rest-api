@@ -28,10 +28,6 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
      */
     protected $addressResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\AddressRestResponseBuilderInterface $addressRestResponseBuilder
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\AddressResourceMapperInterface $addressResourceMapper
-     */
     public function __construct(
         AddressRestResponseBuilderInterface $addressRestResponseBuilder,
         AddressResourceMapperInterface $addressResourceMapper
@@ -69,11 +65,6 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
         return $resources;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $restResource
-     *
-     * @return \Generated\Shared\Transfer\AddressesTransfer|null
-     */
     protected function findAddressesTransferInPayload(RestResourceInterface $restResource): ?AddressesTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutDataTransfer|null $payload */
@@ -86,11 +77,6 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
         return $payload->getAddresses();
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $restResource
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer|null
-     */
     protected function findCustomerTransferInPayload(RestResourceInterface $restResource): ?CustomerTransfer
     {
         /** @var \Generated\Shared\Transfer\RestCheckoutDataTransfer|null $payload */
@@ -103,12 +89,6 @@ class AddressByCheckoutDataResourceRelationshipExpander implements AddressResour
         return $payload->getQuote()->getCustomer();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     protected function createAddressRestResource(
         AddressTransfer $addressTransfer,
         CustomerTransfer $customerTransfer

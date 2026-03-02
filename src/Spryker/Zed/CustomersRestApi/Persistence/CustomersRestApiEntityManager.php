@@ -20,9 +20,6 @@ class CustomersRestApiEntityManager extends AbstractEntityManager implements Cus
      */
     protected const BATCH_SIZE = 200;
 
-    /**
-     * @return void
-     */
     public function updateAddressesWithoutUuid(): void
     {
         $addressesQuery = $this->getFactory()->getAddressesPropelQuery();

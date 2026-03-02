@@ -21,29 +21,16 @@ class AddressRestResponseBuilder implements AddressRestResponseBuilderInterface
      */
     protected $restResourceBuilder;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     */
     public function __construct(RestResourceBuilderInterface $restResourceBuilder)
     {
         $this->restResourceBuilder = $restResourceBuilder;
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createRestResponse(): RestResponseInterface
     {
         return $this->restResourceBuilder->createRestResponse();
     }
 
-    /**
-     * @param string $addressUuid
-     * @param string $customerReference
-     * @param \Generated\Shared\Transfer\RestAddressAttributesTransfer $restAddressAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createAddressRestResource(
         string $addressUuid,
         string $customerReference,
@@ -61,12 +48,6 @@ class AddressRestResponseBuilder implements AddressRestResponseBuilderInterface
             );
     }
 
-    /**
-     * @param string $addressUuid
-     * @param string $customerReference
-     *
-     * @return string
-     */
     protected function createSelfLink(string $addressUuid, string $customerReference): string
     {
         return sprintf(

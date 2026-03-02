@@ -100,12 +100,6 @@ class CustomerWriter implements CustomerWriterInterface
         $this->customerPostCreatePlugins = $customerPostCreatePlugins;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $restCustomersAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function registerCustomer(
         RestRequestInterface $restRequest,
         RestCustomersAttributesTransfer $restCustomersAttributesTransfer
@@ -152,12 +146,6 @@ class CustomerWriter implements CustomerWriterInterface
         return $restResponse->addResource($restResource);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $restCustomersAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function updateCustomer(
         RestRequestInterface $restRequest,
         RestCustomersAttributesTransfer $restCustomersAttributesTransfer
@@ -218,12 +206,6 @@ class CustomerWriter implements CustomerWriterInterface
         return $restResponse->addResource($restResource);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function updateCustomerPassword(
         RestRequestInterface $restRequest,
         RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
@@ -257,11 +239,6 @@ class CustomerWriter implements CustomerWriterInterface
         return $this->restApiError->processCustomerErrorOnPasswordUpdate($restResponse, $customerResponseTransfer);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function anonymizeCustomer(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
@@ -287,11 +264,6 @@ class CustomerWriter implements CustomerWriterInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $customerTransfer
-     *
-     * @return array
-     */
     protected function getCustomerData(RestCustomersAttributesTransfer $customerTransfer): array
     {
         $customerData = $customerTransfer->modifiedToArray(true, true);
@@ -319,12 +291,6 @@ class CustomerWriter implements CustomerWriterInterface
         return $customerAttributes;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function executeCustomerPostCreatePlugins(RestRequestInterface $restRequest, CustomerTransfer $customerTransfer): CustomerTransfer
     {
         foreach ($this->customerPostCreatePlugins as $customerPostCreatePlugin) {

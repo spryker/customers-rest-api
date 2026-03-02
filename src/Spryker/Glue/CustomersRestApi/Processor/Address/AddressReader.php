@@ -46,13 +46,6 @@ class AddressReader implements AddressReaderInterface
      */
     protected $addressRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface $customerClient
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Mapper\AddressResourceMapperInterface $addressesResourceMapper
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiErrorInterface $restApiError
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiValidatorInterface $restApiValidator
-     * @param \Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\AddressRestResponseBuilderInterface $addressRestResponseBuilder
-     */
     public function __construct(
         CustomersRestApiToCustomerClientInterface $customerClient,
         AddressResourceMapperInterface $addressesResourceMapper,
@@ -67,11 +60,6 @@ class AddressReader implements AddressReaderInterface
         $this->addressRestResponseBuilder = $addressRestResponseBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getAddressesByAddressUuid(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->addressRestResponseBuilder->createRestResponse();
@@ -103,12 +91,6 @@ class AddressReader implements AddressReaderInterface
         return $this->getAddressByCustomerTransfer($customerResponseTransfer->getCustomerTransfer(), $restRequest->getResource()->getId(), $restResponse);
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param string $uuid
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer|null
-     */
     public function findAddressByUuid(RestRequestInterface $restRequest, string $uuid): ?AddressTransfer
     {
         $customerTransfer = (new CustomerTransfer())->setIdCustomer((int)$restRequest->getRestUser()->getSurrogateIdentifier());
@@ -123,13 +105,6 @@ class AddressReader implements AddressReaderInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param string $addressUuid
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function getAddressByCustomerTransfer(
         CustomerTransfer $customerTransfer,
         string $addressUuid,
@@ -146,12 +121,6 @@ class AddressReader implements AddressReaderInterface
         return $this->restApiError->addAddressNotFoundError($restResponse);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function getAllAddresses(
         CustomerTransfer $customerTransfer,
         RestResponseInterface $restResponse
@@ -163,12 +132,6 @@ class AddressReader implements AddressReaderInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     protected function getAddressResource(
         AddressTransfer $addressTransfer,
         CustomerTransfer $customerTransfer

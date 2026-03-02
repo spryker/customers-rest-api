@@ -12,11 +12,6 @@ use Generated\Shared\Transfer\RestErrorCollectionTransfer;
 
 interface CheckoutBillingAddressCheckerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestErrorCollectionTransfer
-     */
     public function checkMandatoryFields(
         RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
     ): RestErrorCollectionTransfer;

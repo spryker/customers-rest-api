@@ -22,20 +22,11 @@ class AddressQuoteMapper implements AddressQuoteMapperInterface
      */
     protected $customerFacade;
 
-    /**
-     * @param \Spryker\Zed\CustomersRestApi\Dependency\Facade\CustomersRestApiToCustomerFacadeInterface $customerFacade
-     */
     public function __construct(CustomersRestApiToCustomerFacadeInterface $customerFacade)
     {
         $this->customerFacade = $customerFacade;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function mapAddressesToQuote(
         RestCheckoutRequestAttributesTransfer $restCheckoutRequestAttributesTransfer,
         QuoteTransfer $quoteTransfer
@@ -65,12 +56,6 @@ class AddressQuoteMapper implements AddressQuoteMapperInterface
         return $quoteTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressTransfer $restAddressTransfer
-     * @param \Generated\Shared\Transfer\RestCustomerTransfer $restCustomerTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     protected function getAddressTransfer(RestAddressTransfer $restAddressTransfer, RestCustomerTransfer $restCustomerTransfer): AddressTransfer
     {
         if (!$restCustomerTransfer->getIdCustomer()) {
@@ -89,12 +74,6 @@ class AddressQuoteMapper implements AddressQuoteMapperInterface
         return (new AddressTransfer())->fromArray($restAddressTransfer->toArray(), true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestAddressTransfer $restAddressTransfer
-     * @param \Generated\Shared\Transfer\RestCustomerTransfer $restCustomerTransfer
-     *
-     * @return \Generated\Shared\Transfer\AddressTransfer|null
-     */
     protected function findAddressByUuid(RestAddressTransfer $restAddressTransfer, RestCustomerTransfer $restCustomerTransfer): ?AddressTransfer
     {
         $customerTransfer = (new CustomerTransfer())->setIdCustomer($restCustomerTransfer->getIdCustomer());
@@ -110,12 +89,6 @@ class AddressQuoteMapper implements AddressQuoteMapperInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     * @param \Generated\Shared\Transfer\AddressTransfer $addressTransfer
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected function setItemLevelShippingAddresses(QuoteTransfer $quoteTransfer, AddressTransfer $addressTransfer): QuoteTransfer
     {
         foreach ($quoteTransfer->getItems() as $itemTransfer) {

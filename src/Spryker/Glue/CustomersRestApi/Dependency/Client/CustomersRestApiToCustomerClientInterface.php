@@ -34,11 +34,6 @@ interface CustomersRestApiToCustomerClientInterface
      */
     public function restorePassword(CustomerTransfer $customerTransfer);
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerResponseTransfer
-     */
     public function findCustomerByReference(CustomerTransfer $customerTransfer): CustomerResponseTransfer;
 
     /**
@@ -97,17 +92,7 @@ interface CustomersRestApiToCustomerClientInterface
      */
     public function setCustomer(CustomerTransfer $customerTransfer);
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function setCustomerRawData(CustomerTransfer $customerTransfer): CustomerTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return \Generated\Shared\Transfer\CustomerResponseTransfer
-     */
     public function confirmCustomerRegistration(CustomerTransfer $customerTransfer): CustomerResponseTransfer;
 }

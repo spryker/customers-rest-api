@@ -16,17 +16,11 @@ class AddressesUuidWriter implements AddressesUuidWriterInterface
      */
     protected $addressesEntityManager;
 
-    /**
-     * @param \Spryker\Zed\CustomersRestApi\Persistence\CustomersRestApiEntityManagerInterface $addressesEntityManager
-     */
     public function __construct(CustomersRestApiEntityManagerInterface $addressesEntityManager)
     {
         $this->addressesEntityManager = $addressesEntityManager;
     }
 
-    /**
-     * @return void
-     */
     public function updateAddressesUuid(): void
     {
         $this->addressesEntityManager->updateAddressesWithoutUuid();

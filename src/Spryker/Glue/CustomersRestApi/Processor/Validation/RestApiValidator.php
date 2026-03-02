@@ -40,21 +40,11 @@ class RestApiValidator implements RestApiValidatorInterface
      */
     protected $apiErrors;
 
-    /**
-     * @param \Spryker\Glue\CustomersRestApi\Processor\Validation\RestApiErrorInterface $apiErrors
-     */
     public function __construct(RestApiErrorInterface $apiErrors)
     {
         $this->apiErrors = $apiErrors;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerResponseTransfer $customerResponseTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validateCustomerResponseTransfer(
         CustomerResponseTransfer $customerResponseTransfer,
         RestRequestInterface $restRequest,
@@ -71,12 +61,6 @@ class RestApiValidator implements RestApiValidatorInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomersAttributesTransfer $restCustomersAttributesTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validateCustomerGender(
         RestCustomersAttributesTransfer $restCustomersAttributesTransfer,
         RestResponseInterface $restResponse
@@ -95,12 +79,6 @@ class RestApiValidator implements RestApiValidatorInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function validatePassword(
         RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer,
         RestResponseInterface $restResponse
@@ -124,11 +102,6 @@ class RestApiValidator implements RestApiValidatorInterface
         return $restResponse;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return bool
-     */
     public function isSameCustomerReference(RestRequestInterface $restRequest): bool
     {
         $customerResource = $restRequest->findParentResourceByType(CustomersRestApiConfig::RESOURCE_CUSTOMERS) ?? $restRequest->getResource();
@@ -136,21 +109,11 @@ class RestApiValidator implements RestApiValidatorInterface
         return $restRequest->getRestUser()->getNaturalIdentifier() === $customerResource->getId();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
-     *
-     * @return bool
-     */
     protected function assertPasswordsAreIdentical(RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer): bool
     {
         return $passwordAttributesTransfer->getNewPassword() === $passwordAttributesTransfer->getConfirmPassword();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer
-     *
-     * @return bool
-     */
     protected function assertPasswordNotEmpty(RestCustomerPasswordAttributesTransfer $passwordAttributesTransfer): bool
     {
         return mb_strlen($passwordAttributesTransfer->getNewPassword()) > 1;

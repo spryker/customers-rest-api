@@ -15,22 +15,12 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 
 interface CustomerRestResponseBuilderInterface
 {
-    /**
-     * @param string $customerUuid
-     * @param \Generated\Shared\Transfer\RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer
-     * @param \Generated\Shared\Transfer\CustomerTransfer|null $customerTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createCustomerRestResource(
         string $customerUuid,
         RestCustomersResponseAttributesTransfer $restCustomersResponseAttributesTransfer,
         ?CustomerTransfer $customerTransfer = null
     ): RestResourceInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createNoContentResponse(): RestResponseInterface;
 
     /**
@@ -40,8 +30,5 @@ interface CustomerRestResponseBuilderInterface
      */
     public function createCustomerConfirmationErrorResponse(ArrayObject $customerErrorTransfers): RestResponseInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createCustomerConfirmationCodeMissingErrorResponse(): RestResponseInterface;
 }
