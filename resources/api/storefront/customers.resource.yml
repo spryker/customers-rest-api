@@ -1,0 +1,234 @@
+resource:
+    name: Customers
+    shortName: customers
+    description: 'Customer profile management for authenticated users and registration for new customers'
+
+    provider: Spryker\Glue\CustomersRestApi\Api\Storefront\Provider\CustomersStorefrontProvider
+    processor: Spryker\Glue\CustomersRestApi\Api\Storefront\Processor\CustomersStorefrontProcessor
+
+    securityCode: '411'
+    securityGetStatusCode: 404
+    securityBearerAuthRequired: true
+
+    paginationEnabled: false
+
+    operations:
+        - type: GetCollection
+          description: 'Retrieve the authenticated customer profile as a collection'
+          security: "is_granted('ROLE_CUSTOMER')"
+          openapiContext:
+              summary: 'List authenticated customer profile'
+              description: 'Returns the authenticated customer as a single-item collection. Useful for clients that always call the collection endpoint.'
+              responses:
+                  200:
+                      description: 'Customer profile returned.'
+                  401:
+                      description: 'Missing or invalid access token.'
+
+        - type: Get
+          description: 'Retrieve customer profile'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          openapiContext:
+              summary: 'Retrieve customer profile'
+              description: 'Returns the customer profile by customer reference. Requires ownership — a customer can only read their own profile.'
+              responses:
+                  200:
+                      description: 'Customer profile returned.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Customer not found.'
+
+        - type: Post
+          description: 'Register a new customer account'
+          openapiContext:
+              summary: 'Register a new customer'
+              description: 'Creates a new customer account. Triggers a confirmation email when double opt-in is enabled.'
+              responses:
+                  201:
+                      description: 'Customer registered successfully.'
+                  400:
+                      description: 'Customer email is already in use, or the terms and conditions were not accepted.'
+                  422:
+                      description: 'Validation failed (password mismatch, weak password, invalid email).'
+
+        - type: Patch
+          description: 'Update customer profile'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          openapiContext:
+              summary: 'Update customer profile'
+              description: 'Updates mutable fields on the authenticated customer profile. Password can only be changed via /customer-password.'
+              responses:
+                  200:
+                      description: 'Customer profile updated.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Customer not found.'
+                  422:
+                      description: 'Validation failed.'
+
+        - type: Delete
+          description: 'Anonymize customer account (GDPR)'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          openapiContext:
+              summary: 'Anonymize customer account'
+              description: 'Anonymizes the customer account per GDPR requirements. The account is not deleted — personally identifiable information is removed and the customer is marked as anonymized.'
+              responses:
+                  204:
+                      description: 'Customer anonymized successfully.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Customer not found.'
+
+    includes:
+        - relationshipName: addresses
+          targetResource: CustomersAddresses
+          uriVariableMappings:
+              customerReference: customerReference
+
+    properties:
+        customerReference:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            required: true
+            description: 'Unique customer reference identifier'
+            openapiContext:
+                example: 'DE--123'
+
+        email:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: "The customer's email address which is also used as username"
+            openapiContext:
+                example: 'thomas.bell@spryker.com'
+
+        gender:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: "The customer's gender"
+            openapiContext:
+                example: 'Male'
+                enum: ['Male', 'Female']
+
+        salutation:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: "The customer's salutation"
+            openapiContext:
+                example: 'Mr'
+                enum: ['Mr', 'Mrs', 'Dr', 'Ms', 'n/a']
+
+        firstName:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: "The customer's first name"
+            openapiContext:
+                example: 'Thomas'
+
+        lastName:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: "The customer's last name"
+            openapiContext:
+                example: 'Bell'
+
+        dateOfBirth:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: "The customer's date of birth in YYYY-MM-DD format"
+            openapiContext:
+                example: '1990-01-15'
+
+        phone:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: "The customer's phone number"
+            openapiContext:
+                example: '+49123456789'
+
+        password:
+            type: string
+            writable: true
+            readable: false
+            required: false
+            description: "The password for the customer's account (write-only)"
+            openapiContext:
+                example: '$SecureP@ssw0rd123#'
+
+        confirmPassword:
+            type: string
+            writable: true
+            readable: false
+            required: false
+            description: 'The repeated password for confirmation (write-only)'
+            openapiContext:
+                example: '$SecureP@ssw0rd123#'
+
+        acceptedTerms:
+            type: boolean
+            writable: true
+            readable: true
+            required: true
+            description: 'Indicator if the customer accepted the terms and conditions'
+            openapiContext:
+                example: true
+
+        addresses:
+            type: array
+            writable: false
+            readable: true
+            required: false
+            description: 'Address of the customer (only present when requested via dedicated customers-addresses API or via include of this resource)'
+            openapiContext:
+                example: []
+
+        createdAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the customer was created'
+            openapiContext:
+                example: '2025-01-01T10:00:00+00:00'
+
+        updatedAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the customer was last updated'
+            openapiContext:
+                example: '2025-01-15T12:30:00+00:00'
+
+        anonymizedAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the customer data was anonymized'
+            openapiContext:
+                example: '2025-12-31T23:59:59+00:00'

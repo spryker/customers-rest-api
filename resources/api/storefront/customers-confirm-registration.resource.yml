@@ -1,0 +1,111 @@
+resource:
+    name: CustomersConfirmRegistration
+    shortName: customers-confirm-registration
+    description: 'Confirms customer registration using a registration key sent via email'
+
+    uriVariables:
+        customerReference:
+            type: string
+            description: 'The unique customer reference identifier'
+            example: 'DE--123'
+
+    operations:
+        - type: Post
+          uriTemplate: /customers/{customerReference}/confirm-registration
+          read: false
+          description: "Confirms a customer's registration by validating the provided registration key"
+          openapiContext:
+              summary: 'Confirm customer registration'
+              description: 'Validates the registration key and activates the customer account. Returns the confirmed customer data on success.'
+              responses:
+                  200:
+                      description: 'Customer registration confirmed successfully. Returns customer data.'
+                  422:
+                      description: 'Invalid or expired registration key (covers unknown keys and already-confirmed accounts).'
+
+    processor: Spryker\Glue\CustomersRestApi\Api\Storefront\Processor\CustomersConfirmRegistrationStorefrontProcessor
+
+    properties:
+        customerReference:
+            type: string
+            writable: false
+            readable: true
+            identifier: true
+            description: 'The unique customer reference identifier'
+            openapiContext:
+                example: 'DE--123'
+
+        registrationKey:
+            type: string
+            required: true
+            writable: true
+            readable: false
+            description: "The registration key sent to the customer's email address during registration"
+            openapiContext:
+                example: 'abc123def456ghi789jkl'
+
+        email:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's email address"
+            openapiContext:
+                example: 'john.doe@example.com'
+
+        firstName:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's first name"
+            openapiContext:
+                example: 'John'
+
+        lastName:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's last name"
+            openapiContext:
+                example: 'Doe'
+
+        salutation:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's salutation"
+            openapiContext:
+                example: 'Mr'
+                enum: ['Mr', 'Mrs', 'Dr', 'Ms', 'n/a']
+
+        gender:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's gender"
+            openapiContext:
+                example: 'Male'
+                enum: ['Male', 'Female']
+
+        dateOfBirth:
+            type: string
+            writable: false
+            readable: true
+            description: "The customer's date of birth"
+            openapiContext:
+                example: '1990-01-15'
+
+        createdAt:
+            type: string
+            writable: false
+            readable: true
+            description: 'Timestamp when the customer was created'
+            openapiContext:
+                example: '2024-01-15T10:30:00+00:00'
+
+        updatedAt:
+            type: string
+            writable: false
+            readable: true
+            description: 'Timestamp when the customer was last updated'
+            openapiContext:
+                example: '2024-01-15T10:35:00+00:00'

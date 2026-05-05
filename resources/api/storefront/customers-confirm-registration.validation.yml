@@ -1,0 +1,8 @@
+post:
+    registrationKey:
+        - NotBlank:
+              message: 'validation.not_blank'
+        - Length:
+              min: 1
+              max: 150
+              maxMessage: 'validation.max_length.plural'

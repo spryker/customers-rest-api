@@ -1,5 +1,6 @@
 {
     "include": {
-        "spryker/session": "Session provides backwards compatibility."
+        "spryker/session": "Session provides backwards compatibility.",
+        "spryker/transfer": "Transfer is required for new `getOrFail` functionality."
     }
 }

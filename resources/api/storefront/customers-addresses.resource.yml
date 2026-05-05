@@ -1,0 +1,328 @@
+resource:
+    name: CustomersAddresses
+    shortName: addresses
+    description: 'Customer address management for authenticated customers - billing and shipping addresses'
+
+    provider: Spryker\Glue\CustomersRestApi\Api\Storefront\Provider\CustomersAddressesStorefrontProvider
+    processor: Spryker\Glue\CustomersRestApi\Api\Storefront\Processor\CustomersAddressesStorefrontProcessor
+
+    securityCode: '411'
+    securityBearerAuthRequired: true
+
+    uriVariables:
+        customerReference:
+            type: string
+            description: 'The unique customer reference identifier'
+            example: 'DE--123'
+        uuid:
+            type: string
+            description: 'The address UUID'
+            example: 'customer_address--1--123'
+
+    paginationEnabled: false # Addresses are typically small collections per customer
+
+    operations:
+        - type: GetCollection
+          description: 'Retrieve all addresses for the authenticated customer'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          uriTemplate: '/customers/{customerReference}/addresses'
+          uriVariables:
+              customerReference:
+                  identifiers: [customerReference]
+          openapiContext:
+              summary: 'List customer addresses'
+              description: 'Returns all addresses belonging to the authenticated customer. Requires ownership.'
+              responses:
+                  200:
+                      description: 'Address collection returned.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+
+        - type: Get
+          description: 'Retrieve a specific address by UUID'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
+          uriVariables:
+              customerReference:
+                  identifiers: [customerReference]
+              uuid:
+                  identifiers: [uuid]
+          openapiContext:
+              summary: 'Retrieve customer address'
+              description: 'Returns a single customer address by UUID. Requires ownership.'
+              responses:
+                  200:
+                      description: 'Address returned.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Address not found.'
+
+        - type: Post
+          description: 'Create a new address for the authenticated customer'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          uriTemplate: '/customers/{customerReference}/addresses'
+          uriVariables:
+              customerReference:
+                  identifiers: [customerReference]
+          openapiContext:
+              summary: 'Create customer address'
+              description: 'Adds a new address to the authenticated customer. Setting `isDefaultShipping` or `isDefaultBilling` to true demotes the previous default.'
+              responses:
+                  201:
+                      description: 'Address created.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  422:
+                      description: 'Validation failed (missing required fields, unknown country code).'
+
+        - type: Patch
+          description: 'Update an existing address'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
+          uriVariables:
+              customerReference:
+                  identifiers: [customerReference]
+              uuid:
+                  identifiers: [uuid]
+          openapiContext:
+              summary: 'Update customer address'
+              description: 'Updates a specific address belonging to the authenticated customer.'
+              responses:
+                  200:
+                      description: 'Address updated.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Address not found.'
+                  422:
+                      description: 'Validation failed.'
+
+        - type: Delete
+          description: 'Delete an address (soft delete)'
+          security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
+          uriVariables:
+              customerReference:
+                  identifiers: [customerReference]
+              uuid:
+                  identifiers: [uuid]
+          openapiContext:
+              summary: 'Delete customer address'
+              description: 'Soft-deletes a customer address. The record is retained for audit purposes but no longer usable for checkout.'
+              responses:
+                  204:
+                      description: 'Address deleted.'
+                  401:
+                      description: 'Missing or invalid access token.'
+                  403:
+                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                  404:
+                      description: 'Address not found.'
+
+    includableIn:
+        - resource: Customers
+          relationshipName: addresses
+          uriVariableMappings:
+              customerReference: customerReference
+
+    properties:
+        uuid:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            required: false
+            description: 'Unique identifier for the address (auto-generated)'
+            openapiContext:
+                example: 'customer_address--1--123'
+
+        customerReference:
+            type: string
+            identifier: false
+            writable: false
+            readable: true
+            required: false
+            description: 'Reference to the customer who owns this address'
+            openapiContext:
+                example: 'DE--123'
+
+        salutation:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'The salutation for the address recipient'
+            openapiContext:
+                example: 'Mr'
+                enum: ['Mr', 'Mrs', 'Dr', 'Ms', 'n/a']
+
+        firstName:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'First name for the address recipient'
+            openapiContext:
+                example: 'Thomas'
+
+        lastName:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Last name for the address recipient'
+            openapiContext:
+                example: 'Bell'
+
+        address1:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'First line of the street address'
+            openapiContext:
+                example: 'Kieler Str. 75'
+
+        address2:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Second line of the street address'
+            openapiContext:
+                example: 'Building A'
+
+        address3:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: 'Third line of the street address (optional)'
+            openapiContext:
+                example: 'Floor 3'
+
+        company:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: 'Company name for business addresses'
+            openapiContext:
+                example: 'Spryker Systems GmbH'
+
+        city:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'City name'
+            openapiContext:
+                example: 'Hamburg'
+
+        zipCode:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Postal/ZIP code'
+            openapiContext:
+                example: '20095'
+
+        iso2Code:
+            type: string
+            writable: true
+            readable: true
+            required: true
+            description: 'Two-letter ISO country code'
+            openapiContext:
+                example: 'DE'
+
+        phone:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: 'Phone number for this address'
+            openapiContext:
+                example: '+49 40 12345678'
+
+        comment:
+            type: string
+            writable: true
+            readable: true
+            required: false
+            description: 'Additional delivery instructions or comments'
+            openapiContext:
+                example: 'Please ring the doorbell twice'
+
+        isDefaultShipping:
+            type: boolean
+            writable: true
+            readable: true
+            required: true
+            description: 'Flag indicating if this is the default shipping address'
+            openapiContext:
+                example: false
+
+        isDefaultBilling:
+            type: boolean
+            writable: true
+            readable: true
+            required: true
+            description: 'Flag indicating if this is the default billing address'
+            openapiContext:
+                example: false
+
+        country:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Country name (read-only, derived from iso2Code)'
+            openapiContext:
+                example: 'Germany'
+
+        region:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Region/state name (read-only)'
+            openapiContext:
+                example: 'Hamburg'
+
+        createdAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the address was created'
+            openapiContext:
+                example: '2025-01-15T10:00:00+00:00'
+
+        updatedAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the address was last updated'
+            openapiContext:
+                example: '2025-01-20T14:30:00+00:00'
+
+        deletedAt:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Timestamp when the address was soft-deleted (null if active)'
+            openapiContext:
+                example: null

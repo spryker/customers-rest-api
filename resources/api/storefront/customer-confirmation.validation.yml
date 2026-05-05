@@ -1,0 +1,5 @@
+post:
+    registrationKey:
+        - NotBlank: ~
+        - Length:
+              max: 150

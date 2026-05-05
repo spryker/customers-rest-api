@@ -1,0 +1,33 @@
+resource:
+    name: CustomerConfirmation
+    shortName: customer-confirmation
+    description: 'Confirm customer registration using a registration key sent via email'
+
+    operations:
+        - type: Post
+          uriTemplate: '/customer-confirmation'
+          output: false
+          read: false
+          status: 204
+          description: 'Confirm customer registration by validating the provided registration key'
+          openapiContext:
+              summary: 'Confirm customer registration'
+              description: 'Validates the registration key and activates the customer account.'
+              responses:
+                  204:
+                      description: 'Customer registration confirmed successfully.'
+                  422:
+                      description: 'Invalid or already used registration key.'
+
+    processor: Spryker\Glue\CustomersRestApi\Api\Storefront\Processor\CustomerConfirmationStorefrontProcessor
+
+    properties:
+        registrationKey:
+            type: string
+            identifier: true
+            writable: true
+            readable: false
+            required: true
+            description: "The registration key sent to the customer's email address during registration"
+            openapiContext:
+                example: 'abc123def456ghi789jkl'

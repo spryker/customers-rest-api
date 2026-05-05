@@ -1,0 +1,105 @@
+post:
+    email:
+        - NotBlank: ~
+        - Email: ~
+
+    gender:
+        - NotBlank: ~
+        - Choice:
+              choices: [Male, Female]
+
+    salutation:
+        - NotBlank: ~
+        - Choice:
+              choices: [Mr, Mrs, Dr, Ms, 'n/a']
+
+    firstName:
+        - NotBlank: ~
+        - Length:
+              max: 100
+
+    lastName:
+        - NotBlank: ~
+        - Length:
+              max: 100
+
+    password:
+        - NotBlank: ~
+        - Length:
+              min: 12
+              max: 128
+        - Regex:
+              pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+              message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+    confirmPassword:
+        - NotBlank: ~
+        - Length:
+              min: 12
+              max: 128
+
+    acceptedTerms:
+        - IsTrue:
+              message: 'This value should be true.'
+
+patch:
+    email:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Email: ~
+
+    salutation:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Choice:
+                        choices: [Mr, Mrs, Dr, Ms, 'n/a']
+
+    firstName:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 100
+
+    lastName:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 100
+
+    gender:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Choice:
+                        choices: [Male, Female]
+
+    password:
+        - Optional:
+              constraints:
+                  - Length:
+                        min: 12
+                        max: 128
+                  - Regex:
+                        pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~])[A-Za-z\d!@#$%^&*()\_\-\=\+\[\]\{\}\|;:<>.,\/?\\~]+$/'
+                        message: 'Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.'
+
+    confirmPassword:
+        - Optional:
+              constraints:
+                  - Length:
+                        min: 12
+                        max: 128
+
+    dateOfBirth:
+        - Optional:
+              constraints:
+                  - Date: ~
+
+    phone:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255

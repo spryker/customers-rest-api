@@ -1,0 +1,171 @@
+post:
+    salutation:
+        - NotBlank: ~
+        - Choice:
+              choices: ['Mr', 'Mrs', 'Dr', 'Ms', 'n/a']
+
+    firstName:
+        - NotBlank: ~
+        - Length:
+              max: 100
+
+    lastName:
+        - NotBlank: ~
+        - Length:
+              max: 100
+
+    address1:
+        - NotBlank: ~
+        - Length:
+              max: 255
+
+    address2:
+        - NotBlank: ~
+        - Length:
+              max: 255
+
+    address3:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    city:
+        - NotBlank: ~
+        - Length:
+              min: 3
+              max: 255
+
+    zipCode:
+        - NotBlank: ~
+        - Length:
+              max: 15
+
+    iso2Code:
+        - NotBlank: ~
+        - Length:
+              min: 2
+              max: 2
+
+    phone:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    company:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    comment:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    isDefaultShipping:
+        - NotNull: ~
+        - Type:
+              type: bool
+
+    isDefaultBilling:
+        - NotNull: ~
+        - Type:
+              type: bool
+
+patch:
+    salutation:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Choice:
+                        choices: ['Mr', 'Mrs', 'Dr', 'Ms', 'n/a']
+
+    firstName:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 100
+
+    lastName:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 100
+
+    address1:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 255
+
+    address2:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 255
+
+    address3:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    city:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        min: 3
+                        max: 255
+
+    zipCode:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        max: 15
+
+    iso2Code:
+        - Optional:
+              constraints:
+                  - NotBlank: ~
+                  - Length:
+                        min: 2
+                        max: 2
+
+    phone:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    company:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    comment:
+        - Optional:
+              constraints:
+                  - Length:
+                        max: 255
+
+    isDefaultShipping:
+        - Optional:
+              constraints:
+                  - Type:
+                        type: bool
+
+    isDefaultBilling:
+        - Optional:
+              constraints:
+                  - Type:
+                        type: bool
