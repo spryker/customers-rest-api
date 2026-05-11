@@ -172,6 +172,7 @@
         <property name="createdAt" type="string"/>
         <property name="updatedAt" type="string"/>
         <property name="anonymizedAt" type="string"/>
+        <property name="restorePasswordKey" type="string"/>
     </transfer>
 
     <transfer name="CustomerResponse">
