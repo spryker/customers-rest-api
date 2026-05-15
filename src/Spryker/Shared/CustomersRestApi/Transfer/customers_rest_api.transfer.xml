@@ -149,6 +149,7 @@
 
     <transfer name="Country">
         <property name="name" type="string" restResponseParameter="required"/>
+        <property name="iso2Code" type="string"/>
     </transfer>
 
     <transfer name="Customer">

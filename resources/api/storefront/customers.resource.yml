@@ -182,9 +182,10 @@ resource:
         confirmPassword:
             type: string
             writable: true
-            readable: false
+            readable: true
             required: false
-            description: 'The repeated password for confirmation (write-only)'
+            # BC: legacy always returned this field as null; kept readable to avoid removing it from the public API contract
+            description: 'The repeated password for confirmation (write-only, always null in responses)'
             openapiContext:
                 example: '$SecureP@ssw0rd123#'
 

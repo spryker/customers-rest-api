@@ -30,6 +30,9 @@ class CustomersResourceMapper implements CustomersResourceMapperInterface
             'gender' => $customerTransfer->getGender(),
             'dateOfBirth' => $customerTransfer->getDateOfBirth(),
             'phone' => $customerTransfer->getPhone(),
+            // BC: legacy returned this field as null; kept to avoid a public API contract break
+            'confirmPassword' => null,
+            'acceptedTerms' => $customerTransfer->getAcceptedTerms(),
             'createdAt' => $customerTransfer->getCreatedAt(),
             'updatedAt' => $customerTransfer->getUpdatedAt(),
             'anonymizedAt' => $customerTransfer->getAnonymizedAt(),
