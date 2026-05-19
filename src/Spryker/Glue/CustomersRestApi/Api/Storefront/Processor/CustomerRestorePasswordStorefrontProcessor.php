@@ -48,11 +48,6 @@ class CustomerRestorePasswordStorefrontProcessor extends AbstractStorefrontProce
             return null;
         }
 
-        $detail = null;
-        if ($customerResponseTransfer->getErrors()->count() > 0) {
-            $detail = $customerResponseTransfer->getErrors()->offsetGet(0)->getMessage();
-        }
-
-        throw $this->exceptionFactory->createRestorePasswordKeyInvalidException($detail);
+        throw $this->exceptionFactory->createRestorePasswordKeyInvalidException();
     }
 }
