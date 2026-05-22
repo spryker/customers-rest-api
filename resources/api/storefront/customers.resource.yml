@@ -97,6 +97,9 @@ resource:
           targetResource: AvailabilityNotifications
           uriVariableMappings:
               customerReference: customerReference
+        - relationshipName: wishlists
+          targetResource: Wishlists
+          resolverClass: Spryker\Glue\WishlistsRestApi\Api\Storefront\Relationship\CustomersWishlistsRelationshipResolver
 
     properties:
         customerReference:
