@@ -93,6 +93,10 @@ resource:
           targetResource: CustomersAddresses
           uriVariableMappings:
               customerReference: customerReference
+        - relationshipName: availability-notifications
+          targetResource: AvailabilityNotifications
+          uriVariableMappings:
+              customerReference: customerReference
 
     properties:
         customerReference:

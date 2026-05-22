@@ -128,12 +128,6 @@ resource:
                   404:
                       description: 'Address not found.'
 
-    includableIn:
-        - resource: Customers
-          relationshipName: addresses
-          uriVariableMappings:
-              customerReference: customerReference
-
     properties:
         uuid:
             type: string
