@@ -155,6 +155,7 @@
     <transfer name="Customer">
         <property name="idCustomer" type="int"/>
         <property name="customerReference" type="string" restResponseParameter="required"/>
+        <property name="acceptedTerms" type="bool" description="Indicator if the customer accepted the terms and conditions."/>
         <property name="addresses" type="Addresses"/>
         <property name="defaultShippingAddress" type="string"/>
         <property name="defaultBillingAddress" type="string"/>
