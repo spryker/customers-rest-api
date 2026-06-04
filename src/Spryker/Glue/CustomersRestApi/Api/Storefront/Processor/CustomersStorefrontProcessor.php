@@ -17,11 +17,9 @@ use Spryker\ApiPlatform\State\Processor\AbstractStorefrontProcessor;
 use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Glue\CustomersRestApi\Api\Storefront\Exception\CustomersExceptionFactory;
 use Spryker\Glue\CustomersRestApi\Api\Storefront\Mapper\CustomersResourceMapperInterface;
-use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResource;
-use Spryker\Glue\GlueApplication\Rest\Request\Data\Metadata;
+use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
+use Spryker\Glue\GlueApplication\Compatibility\RequestBuilder\SyntheticRestRequestBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
-use Spryker\Glue\GlueApplication\Rest\Request\Data\Version;
-use Spryker\Glue\GlueApplication\Rest\Request\RequestBuilder;
 use Spryker\Service\Container\Attributes\Plugins;
 use Spryker\Service\Serializer\SerializerServiceInterface;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
@@ -42,6 +40,7 @@ class CustomersStorefrontProcessor extends AbstractStorefrontProcessor
         protected SerializerServiceInterface $serializer,
         protected CustomersExceptionFactory $exceptionFactory,
         protected CustomersResourceMapperInterface $customersResourceMapper,
+        protected SyntheticRestRequestBuilderInterface $syntheticRestRequestBuilder,
         /**
          * @var array<\Spryker\Glue\CustomersRestApiExtension\Dependency\Plugin\CustomerPostCreatePluginInterface>
          */
@@ -213,23 +212,15 @@ class CustomersStorefrontProcessor extends AbstractStorefrontProcessor
         }
     }
 
-    /**
-     * Legacy CustomerPostCreatePluginInterface::postCreate() expects a RestRequestInterface
-     * built by the legacy Glue REST stack. In the API Platform flow that object is not
-     * constructed, so we build a minimal adapter wrapping the Symfony request, populating
-     * RestUser from the `X-Anonymous-Customer-Unique-Id` header so guest-cart migration
-     * plugins keep working.
-     */
     protected function buildRestRequestForLegacyPlugins(): RestRequestInterface
     {
         $httpRequest = $this->hasRequest() ? $this->getRequest() : new SymfonyRequest();
 
-        $metadata = new Metadata('json', 'json', $httpRequest->getMethod(), 'DE', true, new Version(1, 1));
-
-        $restRequest = (new RequestBuilder(new RestResource('customers', null)))
-            ->addHttpRequest($httpRequest)
-            ->addMetadata($metadata)
-            ->build();
+        $restRequest = $this->syntheticRestRequestBuilder->build(
+            $httpRequest,
+            null,
+            CustomersRestApiConfig::RESOURCE_CUSTOMERS,
+        );
 
         $anonymousCustomerId = $httpRequest->headers->get('X-Anonymous-Customer-Unique-Id');
 
