@@ -51,7 +51,7 @@ class CheckoutDataAddressesRelationshipResolver extends AbstractRelationshipReso
                 ));
             }
 
-            foreach ($parent->addressesRelationshipData ?? [] as $addressData) {
+            foreach ($parent->addressesRelationshipData as $addressData) {
                 $resources[] = $this->buildAddressResource($addressData);
             }
         }

@@ -103,6 +103,6 @@ class CustomerRequestValidatorSubscriber implements EventSubscriberInterface
         }
 
         // /customers/{ref}/addresses (customer sub-resource)
-        return ($segments[2] ?? '') === static::RESOURCE_SEGMENT_ADDRESSES;
+        return $segments[2] === static::RESOURCE_SEGMENT_ADDRESSES;
     }
 }
