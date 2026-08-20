@@ -23,7 +23,9 @@ resource:
                   200:
                       description: 'Customer profile returned.'
                   401:
-                      description: 'Missing or invalid access token.'
+                      description: 'Invalid access token.'
+                  403:
+                      description: 'Access denied: missing access token.'
 
         - type: Get
           description: 'Retrieve customer profile'
@@ -35,11 +37,11 @@ resource:
                   200:
                       description: 'Customer profile returned.'
                   401:
-                      description: 'Missing or invalid access token.'
+                      description: 'Invalid access token.'
                   403:
-                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                      description: 'Access denied: missing access token.'
                   404:
-                      description: 'Customer not found.'
+                      description: 'Customer not found, or the reference belongs to another account — the two are deliberately indistinguishable.'
 
         - type: Post
           description: 'Register a new customer account'
@@ -49,10 +51,8 @@ resource:
               responses:
                   201:
                       description: 'Customer registered successfully.'
-                  400:
-                      description: 'Customer email is already in use, or the terms and conditions were not accepted.'
                   422:
-                      description: 'Validation failed (password mismatch, weak password, invalid email).'
+                      description: 'Validation failed, or the email address is already in use.'
 
         - type: Patch
           description: 'Update customer profile'
@@ -64,9 +64,9 @@ resource:
                   200:
                       description: 'Customer profile updated.'
                   401:
-                      description: 'Missing or invalid access token.'
+                      description: 'Invalid access token.'
                   403:
-                      description: 'Access denied — customer reference does not belong to the authenticated user.'
+                      description: 'Access denied: missing access token, or the customer reference belongs to another account.'
                   404:
                       description: 'Customer not found.'
                   422:
@@ -82,11 +82,9 @@ resource:
                   204:
                       description: 'Customer anonymized successfully.'
                   401:
-                      description: 'Missing or invalid access token.'
+                      description: 'Invalid access token.'
                   403:
-                      description: 'Access denied — customer reference does not belong to the authenticated user.'
-                  404:
-                      description: 'Customer not found.'
+                      description: 'Access denied: missing access token, or the customer reference belongs to another account.'
 
     includes:
         - relationshipName: addresses

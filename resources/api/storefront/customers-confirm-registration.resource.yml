@@ -18,7 +18,7 @@ resource:
               summary: 'Confirm customer registration'
               description: 'Validates the registration key and activates the customer account. Returns the confirmed customer data on success.'
               responses:
-                  200:
+                  201:
                       description: 'Customer registration confirmed successfully. Returns customer data.'
                   422:
                       description: 'Invalid or expired registration key (covers unknown keys and already-confirmed accounts).'
