@@ -12,11 +12,14 @@ namespace Spryker\Glue\CustomersRestApi\Api\Storefront\Processor;
 use Generated\Shared\Transfer\CustomerTransfer;
 use Spryker\ApiPlatform\State\Processor\AbstractStorefrontProcessor;
 use Spryker\Client\Customer\CustomerClientInterface;
+use Spryker\Glue\CustomersRestApi\Api\Storefront\Exception\CustomersExceptionFactory;
+use Spryker\Glue\CustomersRestApi\CustomersRestApiConfig;
 
 class CustomerForgottenPasswordStorefrontProcessor extends AbstractStorefrontProcessor
 {
     public function __construct(
         protected CustomerClientInterface $customerClient,
+        protected CustomersExceptionFactory $customersExceptionFactory,
     ) {
     }
 
@@ -25,7 +28,15 @@ class CustomerForgottenPasswordStorefrontProcessor extends AbstractStorefrontPro
         $customerTransfer = (new CustomerTransfer())
             ->setEmail($data->getEmail());
 
-        $this->customerClient->sendPasswordRestoreMail($customerTransfer);
+        $customerResponseTransfer = $this->customerClient->sendPasswordRestoreMail($customerTransfer);
+
+        if (!$customerResponseTransfer->getIsSuccess()) {
+            throw $this->customersExceptionFactory->createExceptionFromCustomerResponse(
+                $customerResponseTransfer,
+                CustomersRestApiConfig::RESPONSE_CODE_FAILED_TO_SEND_EMAIL,
+                CustomersRestApiConfig::RESPONSE_MESSAGE_FAILED_TO_SEND_EMAIL,
+            );
+        }
 
         return null;
     }

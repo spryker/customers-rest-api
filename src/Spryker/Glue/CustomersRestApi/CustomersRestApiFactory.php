@@ -97,8 +97,8 @@ class CustomersRestApiFactory extends AbstractFactory
     {
         return new CustomerForgottenPasswordProcessor(
             $this->getCustomerClient(),
-            $this->getResourceBuilder(),
             $this->createCustomerForgottenPasswordResourceMapper(),
+            $this->createCustomerRestResponseBuilder(),
         );
     }
 

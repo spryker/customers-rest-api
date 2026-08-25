@@ -101,6 +101,16 @@ class CustomerRestResponseBuilder implements CustomerRestResponseBuilderInterfac
         return $restResponse;
     }
 
+    public function createEmailNotSentErrorResponse(): RestResponseInterface
+    {
+        $restErrorMessageTransfer = (new RestErrorMessageTransfer())
+            ->setCode(CustomersRestApiConfig::RESPONSE_CODE_FAILED_TO_SEND_EMAIL)
+            ->setStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->setDetail(CustomersRestApiConfig::RESPONSE_MESSAGE_FAILED_TO_SEND_EMAIL);
+
+        return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
+    }
+
     /**
      * @param \ArrayObject<int, \Generated\Shared\Transfer\CustomerErrorTransfer> $customerErrorTransfers
      * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse

@@ -432,6 +432,20 @@ class CustomersRestApiConfig extends AbstractBundleConfig
      *
      * @var string
      */
+    public const RESPONSE_CODE_FAILED_TO_SEND_EMAIL = '426';
+
+    /**
+     * @api
+     *
+     * @var string
+     */
+    public const RESPONSE_MESSAGE_FAILED_TO_SEND_EMAIL = 'Failed to send email.';
+
+    /**
+     * @api
+     *
+     * @var string
+     */
     public const RESPONSE_MESSAGE_CONFIRMATION_FAILED = 'Failed to confirm a customer.';
 
     /**

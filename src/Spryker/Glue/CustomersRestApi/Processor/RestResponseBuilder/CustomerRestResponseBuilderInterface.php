@@ -31,4 +31,6 @@ interface CustomerRestResponseBuilderInterface
     public function createCustomerConfirmationErrorResponse(ArrayObject $customerErrorTransfers): RestResponseInterface;
 
     public function createCustomerConfirmationCodeMissingErrorResponse(): RestResponseInterface;
+
+    public function createEmailNotSentErrorResponse(): RestResponseInterface;
 }

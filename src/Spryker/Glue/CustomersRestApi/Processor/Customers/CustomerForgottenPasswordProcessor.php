@@ -10,35 +10,16 @@ namespace Spryker\Glue\CustomersRestApi\Processor\Customers;
 use Generated\Shared\Transfer\RestCustomerForgottenPasswordAttributesTransfer;
 use Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface;
 use Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerForgottenPasswordResourceMapperInterface;
-use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface;
+use Spryker\Glue\CustomersRestApi\Processor\RestResponseBuilder\CustomerRestResponseBuilderInterface;
 use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class CustomerForgottenPasswordProcessor implements CustomerForgottenPasswordProcessorInterface
 {
-    /**
-     * @var \Spryker\Glue\CustomersRestApi\Dependency\Client\CustomersRestApiToCustomerClientInterface
-     */
-    protected $customerClient;
-
-    /**
-     * @var \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface
-     */
-    protected $restResourceBuilder;
-
-    /**
-     * @var \Spryker\Glue\CustomersRestApi\Processor\Mapper\CustomerForgottenPasswordResourceMapperInterface
-     */
-    protected $customerForgottenPasswordResourceMapper;
-
     public function __construct(
-        CustomersRestApiToCustomerClientInterface $customerClient,
-        RestResourceBuilderInterface $restResourceBuilder,
-        CustomerForgottenPasswordResourceMapperInterface $customerForgottenPasswordResourceMapper
+        protected CustomersRestApiToCustomerClientInterface $customerClient,
+        protected CustomerForgottenPasswordResourceMapperInterface $customerForgottenPasswordResourceMapper,
+        protected CustomerRestResponseBuilderInterface $customerRestResponseBuilder,
     ) {
-        $this->customerClient = $customerClient;
-        $this->restResourceBuilder = $restResourceBuilder;
-        $this->customerForgottenPasswordResourceMapper = $customerForgottenPasswordResourceMapper;
     }
 
     public function sendPasswordRestoreMail(
@@ -46,10 +27,12 @@ class CustomerForgottenPasswordProcessor implements CustomerForgottenPasswordPro
     ): RestResponseInterface {
         $customerTransfer = $this->customerForgottenPasswordResourceMapper
             ->mapCustomerForgottenPasswordAttributesToCustomerTransfer($restCustomerForgottenPasswordAttributesTransfer);
-        $this->customerClient->sendPasswordRestoreMail($customerTransfer);
+        $customerResponseTransfer = $this->customerClient->sendPasswordRestoreMail($customerTransfer);
 
-        return $this->restResourceBuilder
-            ->createRestResponse()
-            ->setStatus(Response::HTTP_NO_CONTENT);
+        if (!$customerResponseTransfer->getIsSuccess()) {
+            return $this->customerRestResponseBuilder->createEmailNotSentErrorResponse();
+        }
+
+        return $this->customerRestResponseBuilder->createNoContentResponse();
     }
 }
