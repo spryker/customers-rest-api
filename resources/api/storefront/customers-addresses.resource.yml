@@ -42,6 +42,9 @@ resource:
 
         - type: Get
           description: 'Retrieve a specific address by UUID'
+          extraProperties:
+              notFoundCode: '404'
+              notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
           uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
           uriVariables:
@@ -84,6 +87,9 @@ resource:
 
         - type: Patch
           description: 'Update an existing address'
+          extraProperties:
+              notFoundCode: '404'
+              notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
           uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
           uriVariables:
@@ -108,6 +114,9 @@ resource:
 
         - type: Delete
           description: 'Delete an address (soft delete)'
+          extraProperties:
+              notFoundCode: '404'
+              notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
           uriTemplate: '/customers/{customerReference}/addresses/{uuid}'
           uriVariables:
