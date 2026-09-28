@@ -189,6 +189,7 @@ resource:
             writable: true
             readable: true
             required: false
+            responseOptional: true
             # BC: legacy always returned this field as null; kept readable to avoid removing it from the public API contract
             description: 'The repeated password for confirmation (write-only, always null in responses)'
             openapiContext:
@@ -199,7 +200,8 @@ resource:
             writable: true
             readable: true
             required: true
-            description: 'Indicator if the customer accepted the terms and conditions'
+            responseOptional: true
+            description: 'Indicator if the customer accepted the terms and conditions. A registration input; the stored profile keeps no flag, so responses answer none.'
             openapiContext:
                 example: true
 
@@ -208,6 +210,7 @@ resource:
             writable: false
             readable: true
             required: false
+            responseOptional: true
             description: 'Address of the customer (only present when requested via dedicated customers-addresses API or via include of this resource)'
             openapiContext:
                 example: []
@@ -235,6 +238,7 @@ resource:
             writable: false
             readable: true
             required: false
-            description: 'Timestamp when the customer data was anonymized'
+            responseOptional: true
+            description: 'Timestamp when the customer data was anonymized. Set only once the account has been deleted, so a live profile carries none.'
             openapiContext:
                 example: '2025-12-31T23:59:59+00:00'

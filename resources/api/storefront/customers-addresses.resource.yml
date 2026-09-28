@@ -299,33 +299,39 @@ resource:
             writable: false
             readable: true
             required: false
-            description: 'Region/state name (read-only)'
+            responseOptional: true
+            description: 'Region/state name (read-only). Answered only where the address names a region of a country that has them.'
             openapiContext:
                 example: 'Hamburg'
 
+        # Nothing in the Glue layer maps the column onto the resource, so this serializes as null
+        # on every response. It needs a real source or removal from the contract; until then the
+        # description must not promise a value and no example is shown.
         createdAt:
             type: string
             writable: false
             readable: true
             required: false
-            description: 'Timestamp when the address was created'
-            openapiContext:
-                example: '2025-01-15T10:00:00+00:00'
+            responseOptional: true
+            description: 'Timestamp when the address was created. Not populated.'
 
+        # Nothing in the Glue layer maps the column onto the resource, so this serializes as null
+        # on every response. It needs a real source or removal from the contract; until then the
+        # description must not promise a value and no example is shown.
         updatedAt:
             type: string
             writable: false
             readable: true
             required: false
-            description: 'Timestamp when the address was last updated'
-            openapiContext:
-                example: '2025-01-20T14:30:00+00:00'
+            responseOptional: true
+            description: 'Timestamp when the address was last updated. Not populated.'
 
         deletedAt:
             type: string
             writable: false
             readable: true
             required: false
+            responseOptional: true
             description: 'Timestamp when the address was soft-deleted (null if active)'
             openapiContext:
                 example: null
