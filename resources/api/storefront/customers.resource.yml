@@ -177,6 +177,7 @@ resource:
 
         password:
             type: string
+            allowWhitespace: true
             writable: true
             readable: false
             required: false
@@ -186,6 +187,7 @@ resource:
 
         confirmPassword:
             type: string
+            allowWhitespace: true
             writable: true
             readable: true
             required: false
