@@ -81,11 +81,8 @@ class CustomerOwnershipVoter extends Voter
     }
 
     /**
-     * Reads the customer reference from Symfony's `_route_params`, which preserves
-     * the original URL values set by the router. Cannot use `_api_uri_variables`
-     * or `request.attributes['customerReference']` because CustomerRequestSubscriber
-     * overwrites the latter with the authenticated customer's reference before
-     * API Platform resolves URI variables from request attributes.
+     * Reads the customer reference from Symfony's `_route_params`, which holds the
+     * values the router matched from the URL.
      */
     protected function resolveRequestedCustomerReference(): ?string
     {

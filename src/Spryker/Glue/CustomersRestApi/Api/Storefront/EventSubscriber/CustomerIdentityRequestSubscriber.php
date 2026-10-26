@@ -75,7 +75,10 @@ class CustomerIdentityRequestSubscriber implements EventSubscriberInterface
         }
 
         $request->attributes->set(static::ATTRIBUTE_CUSTOMER_TRANSFER, $customerTransfer);
-        $request->attributes->set(static::ATTRIBUTE_CUSTOMER_REFERENCE, $customerTransfer->getCustomerReference());
+
+        if (!$request->attributes->has(static::ATTRIBUTE_CUSTOMER_REFERENCE)) {
+            $request->attributes->set(static::ATTRIBUTE_CUSTOMER_REFERENCE, $customerTransfer->getCustomerReference());
+        }
 
         if ($customerTransfer->getIdCustomer() !== null) {
             $request->attributes->set(static::ATTRIBUTE_ID_CUSTOMER, $customerTransfer->getIdCustomer());
