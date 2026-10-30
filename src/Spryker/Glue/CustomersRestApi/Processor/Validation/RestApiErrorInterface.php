@@ -72,6 +72,8 @@ interface RestApiErrorInterface
      */
     public const ERROR_CUSTOMER_PASSWORD_DENY_LIST = 'customer.password.error.deny_list';
 
+    public const string ERROR_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED = 'customer.password.change_limit_exceeded';
+
     public function addCustomerAlreadyExistsError(RestResponseInterface $restResponse): RestResponseInterface;
 
     public function addCustomerCantRegisterMessageError(RestResponseInterface $restResponse, string $errorMessage): RestResponseInterface;

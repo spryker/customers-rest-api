@@ -88,6 +88,15 @@ class CustomersExceptionFactory
         );
     }
 
+    public function createPasswordChangeLimitExceededException(): GlueApiException
+    {
+        return new GlueApiException(
+            Response::HTTP_TOO_MANY_REQUESTS,
+            CustomersRestApiConfig::RESPONSE_CODE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED,
+            CustomersRestApiConfig::RESPONSE_MESSAGE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED,
+        );
+    }
+
     public function createInvalidPasswordException(): GlueApiException
     {
         return new GlueApiException(

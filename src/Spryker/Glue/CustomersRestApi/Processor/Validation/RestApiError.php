@@ -251,6 +251,12 @@ class RestApiError implements RestApiErrorInterface
 
                 continue;
             }
+
+            if ($customerErrorTransfer->getMessage() === static::ERROR_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED) {
+                $restResponse = $this->addPasswordChangeLimitExceededError($restResponse);
+
+                continue;
+            }
         }
 
         return $restResponse;
@@ -361,6 +367,16 @@ class RestApiError implements RestApiErrorInterface
             ->setCode(CustomersRestApiConfig::RESPONSE_CODE_CUSTOMER_PASSWORD_DENY_LIST)
             ->setStatus(Response::HTTP_BAD_REQUEST)
             ->setDetail(CustomersRestApiConfig::RESPONSE_MESSAGE_CUSTOMER_PASSWORD_DENY_LIST);
+
+        return $restResponse->addError($restErrorMessageTransfer);
+    }
+
+    protected function addPasswordChangeLimitExceededError(RestResponseInterface $restResponse): RestResponseInterface
+    {
+        $restErrorMessageTransfer = (new RestErrorMessageTransfer())
+            ->setCode(CustomersRestApiConfig::RESPONSE_CODE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED)
+            ->setStatus(Response::HTTP_TOO_MANY_REQUESTS)
+            ->setDetail(CustomersRestApiConfig::RESPONSE_MESSAGE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED);
 
         return $restResponse->addError($restErrorMessageTransfer);
     }

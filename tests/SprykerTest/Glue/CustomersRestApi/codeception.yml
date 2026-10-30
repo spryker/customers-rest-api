@@ -19,3 +19,10 @@ suites:
                 - Asserts
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
+    Processor:
+        path: Processor
+        actor: CustomersRestApiProcessorTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\Testify\Helper\Environment

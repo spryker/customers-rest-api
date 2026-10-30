@@ -441,6 +441,10 @@ class CustomersRestApiConfig extends AbstractBundleConfig
      */
     public const RESPONSE_MESSAGE_FAILED_TO_SEND_EMAIL = 'Failed to send email.';
 
+    public const string RESPONSE_CODE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED = '427';
+
+    public const string RESPONSE_MESSAGE_CUSTOMER_PASSWORD_CHANGE_LIMIT_EXCEEDED = 'You reached the limit of password change attempts. Please try again later.';
+
     /**
      * @api
      *

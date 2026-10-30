@@ -22,6 +22,8 @@ class CustomerPasswordStorefrontProcessor extends AbstractStorefrontProcessor
 
     protected const string GLOSSARY_KEY_PASSWORD_SEQUENCE = 'customer.password.error.sequence';
 
+    protected const string GLOSSARY_KEY_PASSWORD_CHANGE_LIMIT_EXCEEDED = 'customer.password.change_limit_exceeded';
+
     public function __construct(
         protected CustomerClientInterface $customerClient,
         protected CustomersExceptionFactory $exceptionFactory,
@@ -65,6 +67,10 @@ class CustomerPasswordStorefrontProcessor extends AbstractStorefrontProcessor
         foreach ($customerResponseTransfer->getErrors() as $customerErrorTransfer) {
             if ($customerErrorTransfer->getMessage() === static::GLOSSARY_KEY_PASSWORD_SEQUENCE) {
                 throw $this->exceptionFactory->createPasswordSequenceNotAllowedException();
+            }
+
+            if ($customerErrorTransfer->getMessage() === static::GLOSSARY_KEY_PASSWORD_CHANGE_LIMIT_EXCEEDED) {
+                throw $this->exceptionFactory->createPasswordChangeLimitExceededException();
             }
         }
 
