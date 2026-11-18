@@ -25,6 +25,9 @@ resource:
         - type: GetCollection
           description: 'Retrieve all addresses for the authenticated customer'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          extraProperties:
+              securityOwnership:
+                  ownerUriVariable: customerReference
           uriTemplate: '/customers/{customerReference}/addresses'
           uriVariables:
               customerReference:
@@ -43,6 +46,8 @@ resource:
         - type: Get
           description: 'Retrieve a specific address by UUID'
           extraProperties:
+              securityOwnership:
+                  ownerUriVariable: customerReference
               notFoundCode: '404'
               notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
@@ -68,6 +73,9 @@ resource:
         - type: Post
           description: 'Create a new address for the authenticated customer'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
+          extraProperties:
+              securityOwnership:
+                  ownerUriVariable: customerReference
           uriTemplate: '/customers/{customerReference}/addresses'
           uriVariables:
               customerReference:
@@ -88,6 +96,8 @@ resource:
         - type: Patch
           description: 'Update an existing address'
           extraProperties:
+              securityOwnership:
+                  ownerUriVariable: customerReference
               notFoundCode: '404'
               notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"
@@ -115,6 +125,8 @@ resource:
         - type: Delete
           description: 'Delete an address (soft delete)'
           extraProperties:
+              securityOwnership:
+                  ownerUriVariable: customerReference
               notFoundCode: '404'
               notFoundMessage: 'Address was not found.'
           security: "is_granted('ROLE_CUSTOMER') and is_granted('CUSTOMER_OWNER')"

@@ -21,6 +21,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Used in YAML security expressions:
  *   is_granted('CUSTOMER_OWNER')
  *
+ * @deprecated Use the ownership condition on the operation's permission grant (securityOwnership) instead.
+ *
  * @extends \Symfony\Component\Security\Core\Authorization\Voter\Voter<string, mixed>
  */
 class CustomerOwnershipVoter extends Voter
